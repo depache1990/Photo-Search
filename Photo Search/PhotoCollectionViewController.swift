@@ -62,7 +62,7 @@ class PhotoCollectionViewController: UICollectionViewController {
     
     private func fetchImages () {
         
-        NetworkManager.shared.fetchImages(query: "random") { searchResult in
+        NetworkManager.shared.fetchImages(query: "Watermelon") { searchResult in
             self.results = searchResult!.results
             self.collectionView.reloadData()
         }
