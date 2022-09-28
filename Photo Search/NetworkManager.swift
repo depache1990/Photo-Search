@@ -13,7 +13,7 @@ struct NetworkManager {
     private init() {}
     
     func fetchImages(query: String, with complition: @escaping(SearchResults?)-> Void) {
-        
+        let query = query.split(separator: " ").joined(separator: "%20")
         let stringURL = "https://api.unsplash.com/search/photos?page=1&per_page=50&query=\(query)&client_id=\(apiKey)"
         guard let url = URL(string: stringURL) else { return }
         

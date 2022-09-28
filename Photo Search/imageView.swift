@@ -12,6 +12,7 @@ class imageView: UIImageView {
 
     func fetchImage(from url: String) {
         guard let imageURL = URL(string: url) else {
+            image = UIImage(named: "network.badge.shield.half.filled")
             return
         }
         // Использовать изображение из кеша, если есть

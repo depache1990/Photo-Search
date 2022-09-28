@@ -14,18 +14,29 @@ class PhotoCollectionViewController: UICollectionViewController {
     private let searchController = UISearchController(searchResultsController: nil)
     private var timer: Timer?
     
+    private var addBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(barButtonSystemItem: .add, target: PhotoCollectionViewController.self, action:#selector(addBarButtonTapped))
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
         fetchImages()
         navigationItem.searchController = searchController
         searchController.searchBar.delegate = self
+    }
+    private func setupNavigationBar() {
+        navigationItem.rightBarButtonItems = [addBarButtonItem]
+    }
+    
+    @objc private func addBarButtonTapped() {
+        print(#function)
     }
 
   //   MARK: - Navigation
      
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let indexPath = collectionView.indexPathsForSelectedItems?.first else { return }
-        
         
         var unsplashPhoto: UnsplashPhoto
         unsplashPhoto = results[indexPath.item]
@@ -50,6 +61,7 @@ class PhotoCollectionViewController: UICollectionViewController {
     }
     
     private func fetchImages () {
+        
         NetworkManager.shared.fetchImages(query: "random") { searchResult in
             self.results = searchResult!.results
             self.collectionView.reloadData()
@@ -74,7 +86,7 @@ extension PhotoCollectionViewController: UISearchBarDelegate {
             timer?.invalidate()
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
             self.results = []
-                
+    
                 NetworkManager.shared.fetchImages(query: text)  { [weak self] (searchResults) in
                     guard let fetchedPhotos = searchResults else { return }
                     self?.results = fetchedPhotos.results
@@ -88,22 +100,22 @@ extension PhotoCollectionViewController: UISearchBarDelegate {
 extension PhotoCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemsPerRow: CGFloat = 2
-        let paddingWidth = 20 * (itemsPerRow + 1)
+        let paddingWidth = 2 * (itemsPerRow + 1)
         let availableWidth = collectionView.frame.width - paddingWidth
         let widthPerItem = availableWidth / itemsPerRow
         return CGSize(width: widthPerItem, height: widthPerItem)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        return UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 20
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 20
+        return 2
     }
 }
     

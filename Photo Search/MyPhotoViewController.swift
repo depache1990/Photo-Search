@@ -20,6 +20,8 @@ class MyPhotoViewController: UIViewController {
         activityIndicator.hidesWhenStopped = true
     }
     
+ 
+    
     private func fetchImage () {
         guard let url = URL(string: photo.urls.small_s3) else { return }
         DispatchQueue.global().async {

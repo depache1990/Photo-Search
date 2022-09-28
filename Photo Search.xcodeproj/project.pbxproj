@@ -50,8 +50,8 @@
 		690F853828BE159200B0AFB8 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				69D4D12528BBEF6D0023E34D /* MyPhotoViewController.swift */,
 				69FB543428B7CB9B005524A1 /* PhotoCollectionViewController.swift */,
+				69D4D12528BBEF6D0023E34D /* MyPhotoViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
